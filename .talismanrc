@@ -1,0 +1,22 @@
+fileignoreconfig:
+- filename: Dockerfile
+  checksum: 92e42432e8abeea7efdc9fe2da5bf1baf1595d0e5acd5c2b275a5bf0e943518a
+- filename: Gemfile
+  checksum: 3ad9a05c7946d7906690e966e82577fbd9bbd41bc3ef91b308e9042e1de6aeb7
+- filename: app/models/movie.rb
+  checksum: d9ed081765718b61443c3973c9f990b9bf6b170d7de40dc762ca52bc029c11d4
+- filename: config/credentials.yml.enc
+  checksum: 436a11f75d13812298a62fc5ee890ca8c5cc8e46a440eb9e6cd3783652d47eaa
+- filename: config/database.yml
+  checksum: 23dfb47970086e042e768541fc16dacf689dfe470263ac238b087114522f9435
+- filename: config/environment.rb
+  checksum: d0c1b7ce8bcba5fd87145cbd81982f3ae77f7d653e47c8e1db807cfeb29d0267
+- filename: config/environments/production.rb
+  checksum: 815eb5d170fde1f770f0b2f9b53e3f16bad103f27b8d1316d493c7bffcc3018f
+- filename: config/initializers/filter_parameter_logging.rb
+  checksum: 634a71c46d2208e85621843941d9ebb32903120005cbe7377c25876a5dd4f0c1
+- filename: config/storage.yml
+  checksum: 9bc94b1f2e214e78b41179a56ebeb546e469ec8f0ce3f507006678fcba89f02e
+- filename: db/schema.rb
+  checksum: c4dc48f0ef669241c3d462e66068d782e7dbc60e42c151f2f5033cced1f8d9ef
+version: "1.0"
