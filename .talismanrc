@@ -18,5 +18,5 @@ fileignoreconfig:
 - filename: config/storage.yml
   checksum: 9bc94b1f2e214e78b41179a56ebeb546e469ec8f0ce3f507006678fcba89f02e
 - filename: db/schema.rb
-  checksum: c4dc48f0ef669241c3d462e66068d782e7dbc60e42c151f2f5033cced1f8d9ef
+  checksum: 97151fed4284978fffc316d71a0674a7512f97874dea0fca811cae95b956ff41
 version: "1.0"

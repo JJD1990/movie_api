@@ -12,30 +12,34 @@ class Movie < ApplicationRecord
     if response.success?
       data = response.parsed_response
 
-      # Check if the movie already exists (by title)
       movie = Movie.find_by(title: data['Title'])
 
       if movie
         Rails.logger.info("[Movie.fetch_movie] Movie '#{movie.title}' already exists.")
       else
-        # If it doesn't exist, create it
+        poster_url = if data["Poster"].present? && data["Poster"] != "N/A"
+          data["Poster"]
+        else
+          ActionController::Base.helpers.asset_path("second-sig.png")
+        end
+
         movie = Movie.create(
           title: data['Title'],
           year: Date.parse("01-01-#{data["Year"]}"),
           rating: data['imdbRating'].to_f,
           runtime: data['Runtime'].to_i,
-          director: data['Director']
+          director: data['Director'],
+          poster_url:
         )
+
         Rails.logger.info("[Movie.fetch_movie] New movie '#{movie.title}' created.")
       end
 
-      # Parse and associate actors
+      # Associate actors
       actor_names = data['Actors'].split(",").map(&:strip)
 
       actor_names.each do |name|
         actor = Actor.find_or_create_by(name: name)
-
-        # Add movie to actor's list if not already there
         unless actor.movies.exists?(movie.id)
           actor.movies << movie
           Rails.logger.info("[Movie.fetch_movie] Added movie '#{movie.title}' to actor '#{actor.name}'.")
@@ -51,5 +55,9 @@ class Movie < ApplicationRecord
   rescue StandardError => e
     Rails.logger.fatal("[Movie.fetch_movie] Exception: #{e.class} - #{e.message}")
     { error: "An exception occurred while fetching movie data: #{e.message}" }
+  end
+
+  def poster_url_or_default
+    poster_url.presence || ActionController::Base.helpers.asset_path("second-sig.png")
   end
 end

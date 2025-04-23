@@ -24,4 +24,8 @@
     <%= movie.director %>
   </p>
 
+  <p>
+    <strong>Poster:</strong><br>
+    <%= image_tag(movie.poster_url_or_default, alt: "#{movie.title} poster", style: "max-width: 300px;") %>
+  </p>
 </div>
