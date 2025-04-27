@@ -1,9 +1,9 @@
-require 'httparty'
+require "httparty"
 
 class Movie < ApplicationRecord
   has_and_belongs_to_many :actors, through: :actors_movies
   include HTTParty
-  base_uri 'https://www.omdbapi.com'
+  base_uri "https://www.omdbapi.com"
 
   def self.fetch_movie(movie_title)
     api_key = Rails.application.credentials[:movie_api_key]
@@ -12,7 +12,7 @@ class Movie < ApplicationRecord
     if response.success?
       data = response.parsed_response
 
-      movie = Movie.find_by(title: data['Title'])
+      movie = Movie.find_by(title: data["Title"])
 
       if movie
         Rails.logger.info("[Movie.fetch_movie] Movie '#{movie.title}' already exists.")
@@ -24,11 +24,11 @@ class Movie < ApplicationRecord
         end
 
         movie = Movie.create(
-          title: data['Title'],
+          title: data["Title"],
           year: Date.parse("01-01-#{data["Year"]}"),
-          rating: data['imdbRating'].to_f,
-          runtime: data['Runtime'].to_i,
-          director: data['Director'],
+          rating: data["imdbRating"].to_f,
+          runtime: data["Runtime"].to_i,
+          director: data["Director"],
           poster_url:
         )
 
@@ -36,7 +36,7 @@ class Movie < ApplicationRecord
       end
 
       # Associate actors
-      actor_names = data['Actors'].split(",").map(&:strip)
+      actor_names = data["Actors"].split(",").map(&:strip)
 
       actor_names.each do |name|
         actor = Actor.find_or_create_by(name: name)
