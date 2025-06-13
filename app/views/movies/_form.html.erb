@@ -1,42 +1,43 @@
-<%= form_with(model: movie) do |form| %>
+<%= form_with(model: movie, class: "bg-white p-8 rounded-2xl shadow-lg max-w-lg mx-auto space-y-6") do |form| %>
+  
   <% if movie.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(movie.errors.count, "error") %> prohibited this movie from being saved:</h2>
-
-      <ul>
-        <% movie.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+    <div class="bg-red-100 text-red-700 p-4 rounded-md">
+      <h2 class="font-bold mb-2"><%= pluralize(movie.errors.count, "error") %> prohibited this movie from being saved:</h2>
+      <ul class="list-disc list-inside">
+        <% movie.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
   <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+    <%= form.label :title, class: "block text-gray-700 font-bold mb-2" %>
+    <%= form.text_field :title, class: "w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" %>
   </div>
 
   <div>
-    <%= form.label :year, style: "display: block" %>
-    <%= form.date_field :year %>
+    <%= form.label :year, class: "block text-gray-700 font-bold mb-2" %>
+    <%= form.date_field :year, class: "w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" %>
   </div>
 
   <div>
-    <%= form.label :rating, style: "display: block" %>
-    <%= form.text_field :rating %>
+    <%= form.label :rating, class: "block text-gray-700 font-bold mb-2" %>
+    <%= form.text_field :rating, class: "w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" %>
   </div>
 
   <div>
-    <%= form.label :runtime, style: "display: block" %>
-    <%= form.number_field :runtime %>
+    <%= form.label :runtime, class: "block text-gray-700 font-bold mb-2" %>
+    <%= form.number_field :runtime, class: "w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" %>
   </div>
 
   <div>
-    <%= form.label :director, style: "display: block" %>
-    <%= form.text_field :director %>
+    <%= form.label :director, class: "block text-gray-700 font-bold mb-2" %>
+    <%= form.text_field :director, class: "w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="flex justify-end">
+    <%= form.submit movie.persisted? ? "Update Movie" : "Create Movie", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition" %>
   </div>
+
 <% end %>
