@@ -3,4 +3,13 @@
     <strong>Name:</strong>
     <%= actor.name %>
   </p>
+
+  <p>
+    <strong>Actors Movies:</strong>
+    <% movies = actor.movies.all %>
+    <ul>
+      <% movies.each do |movie| %>
+        <li><%= movie.title %></li>
+      <% end %>
+    </ul>
 </div>
