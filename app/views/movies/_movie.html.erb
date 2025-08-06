@@ -1,31 +1,30 @@
-<div id="<%= dom_id movie %>">
-  <p>
-    <strong>Title:</strong>
-    <%= movie.title %>
-  </p>
+<div id="<%= dom_id movie %>" class="bg-blue-400 shadow-md rounded-2xl overflow-hidden p-6 mb-8 space-y-4">
+  <div class="flex flex-col items-center">
+    <%= image_tag(movie.poster_url_or_default, alt: "#{movie.title} poster", class: "w-full max-w-xs rounded-lg") %>
+  </div>
 
-  <p>
-    <strong>Year:</strong>
-    <%= movie.year %>
-  </p>
+  <div class="space-y-2">
+    <h2 class="text-2xl font-bold text-gray-800 text-center"><%= movie.title %></h2>
+    <p class="text-sm text-white text-center"><%= movie.year&.strftime("%Y") %></p>
+  </div>
 
-  <p>
-    <strong>Rating:</strong>
-    <%= movie.rating %>
-  </p>
+  <div class="mt-4 space-y-2">
+    <p><span class="font-semibold text-gray-700">Rating:</span> <%= movie.rating %></p>
+    <p><span class="font-semibold text-gray-700">Runtime:</span> <%= movie.runtime %> min</p>
+    <p><span class="font-semibold text-gray-700">Director:</span> <%= movie.director %></p>
+  </div>
+  <p> 
+    
+    <% if controller.action_name == 'show' %>
 
-  <p>
-    <strong>Runtime:</strong>
-    <%= movie.runtime %>
-  </p>
 
-  <p>
-    <strong>Director:</strong>
-    <%= movie.director %>
-  </p>
-
-  <p>
-    <strong>Poster:</strong><br>
-    <%= image_tag(movie.poster_url_or_default, alt: "#{movie.title} poster", style: "max-width: 300px;") %>
+        <p><%= link_to "Edit this movie", edit_movie_path(@movie), class:'bg-purple-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %></p>
+        <p><%= link_to "Back to movies", movies_path, class:'bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded' %></p>
+        <p><%= button_to "Destroy this movie", @movie, method: :delete, class:'bg-red-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded' %></p>
+      <% else %>
+        <%= link_to "Show this movie", movie, class:'bg-purple-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded' %>
+    <% end %>
+    
+    
   </p>
 </div>
